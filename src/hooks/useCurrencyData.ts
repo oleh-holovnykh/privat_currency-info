@@ -12,8 +12,7 @@ const useCurrencyData = () => {
     async function fetchCurrencies() {
       try {
         const response = await axios.get('https://api.monobank.ua/bank/currency');
-        
-        // Сохраняем полученные данные в sessionStorage
+
         sessionStorage.setItem('currencyData', JSON.stringify(response.data));
 
         setCurrencies(response.data);
