@@ -1,19 +1,5 @@
-.exchange-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #212529;
-  margin: 0;
-  color: aliceblue;
-}
-
-.table {
-  width: max-content;
-}
-
 td {
   text-align: center; 
-  vertical-align: middle; 
 }
 
 .currencies, .requisites {

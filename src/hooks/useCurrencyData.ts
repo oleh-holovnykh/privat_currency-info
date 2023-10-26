@@ -36,7 +36,7 @@ const useCurrencyData = () => {
     }
   }, []);
 
-  return { currencies, loading, error };
+  return {currencies, loading, error };
 };
 
 export default useCurrencyData;

@@ -5,7 +5,7 @@ import { normalizeCurrency } from './helpers/normalizeCurrency';
 import useCurrencyData from './hooks/useCurrencyData';
 
 function App() {
-  const { currencies, loading, error } = useCurrencyData();
+  const {currencies, loading, error} = useCurrencyData();
   const [showRequisites, setShowRequisites] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -13,19 +13,20 @@ function App() {
   };
 
   if (loading) {
-    return <div>завантаження даних...</div>;
-  }
+    return <div className='text-center'>Завантаження даних...</div>;
+  } 
 
-  if (error) {
+  if (error !== null) {``
     return (
       <div exchange-container>
         Помилка при завантажені данних: {error.message}.{' '}
         <a
-          href='https://monobankinfo.com.ua/uk/kurs-valiut-monobank/'
+          href='https://minfin.com.ua/ua/company/monobank/currency/'
           target='_blank'
           rel='noopener noreferrer'
+          className="text-blue-500 hover:text-blue-700 underline"
         >
-          Подивитись поточний курс на офіційному сайті Монобанку
+          Подивитись поточний курс Монобанку на сайті minfin.com.ua
         </a>
       </div>
     );
@@ -39,8 +40,8 @@ function App() {
 
   return (
     <>
-      <div className='exchange-container'>
-        <table className='table table-dark table-hover'>
+      <div className='bg-slate-800 text-white flex justify-center items-center'>
+        <table>
           <thead>
             <tr>
               <th></th>
@@ -63,7 +64,7 @@ function App() {
           <br />
           €150 = {Math.round(150 * euroRate!.rateSell)} грн
         </div>
-        <button onClick={handleClick} className='showButton'>
+        <button onClick={handleClick} className='mb-2 text-sm bg-white hover:bg-gray-100 text-gray-800 py-1 px-2 border border-gray-200 rounded shadow'>
           {showRequisites ? 'Cховати реквізити' : 'Показати реквізити'}
         </button>
         {showRequisites && (
