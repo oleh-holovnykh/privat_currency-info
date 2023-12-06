@@ -10,3 +10,7 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+td {
+  text-align: center;
+}

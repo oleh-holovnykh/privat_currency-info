@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import './App.css';
 import { findEuro } from './helpers/findEuro';
 import { normalizeCurrency } from './helpers/normalizeCurrency';
 import useCurrencyData from './hooks/useCurrencyData';
 
 function App() {
-  const {currencies, loading, error} = useCurrencyData();
+  const { currencies, loading, error } = useCurrencyData();
   const [showRequisites, setShowRequisites] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -14,9 +13,9 @@ function App() {
 
   if (loading) {
     return <div className='text-center'>Завантаження даних...</div>;
-  } 
-
-  if (error !== null) {``
+  }
+  console.log(['error:', error])
+  if (error !== null) {
     return (
       <div exchange-container>
         Помилка при завантажені данних: {error.message}.{' '}
@@ -24,7 +23,7 @@ function App() {
           href='https://minfin.com.ua/ua/company/monobank/currency/'
           target='_blank'
           rel='noopener noreferrer'
-          className="text-blue-500 hover:text-blue-700 underline"
+          className='text-blue-500 hover:text-blue-700 underline'
         >
           Подивитись поточний курс Монобанку на сайті minfin.com.ua
         </a>
@@ -35,40 +34,59 @@ function App() {
   const euroRate = findEuro(currencies);
 
   if (euroRate) {
+    console.log(['test', euroRate]);
     normalizeCurrency(euroRate);
   }
 
   return (
     <>
-      <div className='bg-slate-800 text-white flex justify-center items-center'>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Продаж</th>
-            </tr>
-          </thead>
+      <div className='mb-2 bg-slate-800 text-white flex justify-center items-center'>
+        <table className='border-separate border-spacing-x-2'>
           <tbody>
             <tr>
+              <td></td>
+              <td className='text-gray-400'>Buy</td>
+              <td className='text-gray-400'>Sell</td>
+            </tr>
+            <tr>
               <td>EUR</td>
+              <td>{euroRate!.rateBuy}</td>
               <td>{euroRate?.rateSell}</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className='display-price'>
-        <div className='currencies'>
-          €50 = {Math.round(50 * euroRate!.rateSell)} грн
-          <br />
-          €100 = {Math.round(100 * euroRate!.rateSell)} грн
-          <br />
-          €150 = {Math.round(150 * euroRate!.rateSell)} грн
+      <div className='text-center mb-2'>
+        <div className='mb-2'>
+          <span className='mb-2 block'>
+            <b>Модуль:</b>
+            <br />
+            €150 = {Math.round(150 * euroRate!.rateSell)} грн
+          </span>
+
+          {/* <br />
+          <span className='text-gray-400'>
+            €50 = {Math.round(50 * euroRate!.rateSell)} грн
+            <br /> 
+            €100 = {Math.round(100 * euroRate!.rateSell)} грн{' '}
+          </span> */}
+{/* 
+          <span>
+            <b>Група практики:</b>
+            <br />
+            PayPal €{(600 / euroRate!.rateBuy).toFixed(2)}
+            <br />
+            ФОП 600 грн
+          </span> */}
         </div>
-        <button onClick={handleClick} className='mb-2 text-sm bg-white hover:bg-gray-100 text-gray-800 py-1 px-2 border border-gray-200 rounded shadow'>
+        <button
+          onClick={handleClick}
+          className='mb-2 text-sm bg-white hover:bg-gray-100 text-gray-800 py-1 px-2 border border-gray-200 rounded shadow'
+        >
           {showRequisites ? 'Cховати реквізити' : 'Показати реквізити'}
         </button>
         {showRequisites && (
-          <div className='requisites'>
+          <div className='text-left w-max mt-2 mx-auto text-gray-400'>
             Отримувач: ФОП Шепель Володимир Вікторович
             <br />
             IBAN: UA733220010000026006300003278
