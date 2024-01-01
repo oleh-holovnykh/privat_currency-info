@@ -6,12 +6,13 @@ export interface Event {
 }
 
 export interface Retreat extends Event {
-  title: string;
   description: string;
+  title: string;
 }
 
 export interface Module extends Event {
   module: number;
+  title: string;
 }
 
 export interface PracticeClass extends Event {

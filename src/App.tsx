@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { findEuro } from './helpers/findEuro';
 import { normalizeCurrency } from './helpers/normalizeCurrency';
 import useCurrencyData from './hooks/useCurrencyData';
+import { Schedule } from './components/Schedule';
+import modules from './api/moduleSchedule.json';
+import practices from './api/practiceSchedule.json';
+import retreats from './api/retreatSchedule.json';
 
 function App() {
   const { currencies, loading, error } = useCurrencyData();
@@ -143,6 +147,11 @@ function App() {
           style={{ borderWidth: 0, width: 500, height: 400 }}
         ></iframe>
       </div>)}
+      <Schedule 
+        modules={modules}
+        practices={practices}
+        retreats={retreats}
+      />
     </>
   );
 }
