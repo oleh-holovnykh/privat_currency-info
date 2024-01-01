@@ -6,9 +6,22 @@ import useCurrencyData from './hooks/useCurrencyData';
 function App() {
   const { currencies, loading, error } = useCurrencyData();
   const [showRequisites, setShowRequisites] = useState<boolean>(false);
+  const [showSchedule, setShowSchedule] = useState<boolean>(false);
 
-  const handleClick = () => {
+  const handleRequisitesClick = () => {
     setShowRequisites(!showRequisites);
+
+    if (showSchedule) {
+      setShowSchedule(!showSchedule);
+    }
+  };
+
+  const handleScheduleClick = () => {
+    setShowSchedule(!showSchedule);
+
+    if (showRequisites) {
+      setShowRequisites(!showRequisites);
+    }
   };
 
   if (loading) {
@@ -45,24 +58,42 @@ function App() {
           <tbody>
             <tr>
               <td></td>
-              <td className='text-gray-400'>Buy</td>
+              {/* <td className='text-gray-400'>Buy</td> */}
               <td className='text-gray-400'>Sell</td>
             </tr>
             <tr>
               <td>EUR</td>
-              <td>{euroRate!.rateBuy}</td>
+              {/* <td>{euroRate!.rateBuy}</td> */}
               <td>{euroRate?.rateSell}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div className='text-center mb-2'>
-        <div className='mb-2'>
           <span className='mb-2 block'>
             <b>Модуль:</b>
             <br />
             €150 = {Math.round(150 * euroRate!.rateSell)} грн
           </span>
+          <div className='mb-2'>
+            <button
+              onClick={handleRequisitesClick}
+              className={`mr-2 text-sm text-gray-800 py-1 px-2 border border-gray-200 rounded ${
+                showRequisites ? 'hover:bg-white bg-gray-100' : 'bg-white hover:bg-gray-100 shadow'
+              }`}
+            >
+              {showRequisites ? 'Cховати реквізити' : 'Показати реквізити'}
+            </button>
+
+            <button
+              onClick={handleScheduleClick}
+              className={`text-sm text-gray-800 py-1 px-2 border border-gray-200 rounded ${
+                showSchedule ?  'hover:bg-white bg-gray-100' : 'bg-white hover:bg-gray-100 shadow'
+              }`}
+            >
+              {showSchedule ? 'Cховати розклад' : 'Показати розклад'}
+            </button>
+          </div>
 
           {/* <br />
           <span className='text-gray-400'>
@@ -78,13 +109,7 @@ function App() {
             <br />
             ФОП 600 грн
           </span> */}
-        </div>
-        <button
-          onClick={handleClick}
-          className='mb-2 text-sm bg-white hover:bg-gray-100 text-gray-800 py-1 px-2 border border-gray-200 rounded shadow'
-        >
-          {showRequisites ? 'Cховати реквізити' : 'Показати реквізити'}
-        </button>
+      </div>
         {showRequisites && (
           <div className='text-left w-max mt-2 mx-auto text-gray-400'>
             Отримувач: ФОП Шепель Володимир Вікторович
@@ -111,7 +136,13 @@ function App() {
             <br />А не від ФОП, чи організації
           </div>
         )}
-      </div>
+      
+      {showSchedule && (<div className='flex justify-center items-center'>
+        <iframe
+          src="https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23ffffff&ctz=Europe%2FKiev&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&hl=uk&src=OTJhYzYxYTgwZmZkZWMxZGFmMDgwZDc5ODFkOTc3MGZmMTk2OTA3YWNmY2Y2NjcwYzRkMTIxMmJjODBlNzFhZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5"
+          style={{ borderWidth: 0, width: 500, height: 400 }}
+        ></iframe>
+      </div>)}
     </>
   );
 }
