@@ -3,9 +3,12 @@ import { findEuro } from './helpers/findEuro';
 import { normalizeCurrency } from './helpers/normalizeCurrency';
 import useCurrencyData from './hooks/useCurrencyData';
 import { Schedule } from './components/Schedule';
-import modules from './api/moduleSchedule.json';
-import practices from './api/practiceSchedule.json';
-import retreats from './api/retreatSchedule.json';
+import modules from './data/moduleSchedule.json';
+import practices from './data/practiceSchedule.json';
+import retreats from './data/retreatSchedule.json';
+import ie from './data/individualEntrepreneur.json';
+import { createSchedule } from './helpers/сreateSchedule';
+import { CopyButton } from './components/copyButton';
 
 function App() {
   const { currencies, loading, error } = useCurrencyData();
@@ -54,6 +57,9 @@ function App() {
     console.log(['test', euroRate]);
     normalizeCurrency(euroRate);
   }
+
+  const nextGropuDate = new Date(createSchedule(modules, practices,retreats)[0].startDate);
+  const nextGrupDateToPrint = `${nextGropuDate.getDate().toString().padStart(2, '0')}.${(nextGropuDate.getMonth() + 1).toString().padStart(2, '0')}`
 
   return (
     <>
@@ -116,22 +122,22 @@ function App() {
       </div>
         {showRequisites && (
           <div className='text-left w-max mt-2 mx-auto text-gray-600'>
-            Отримувач: ФОП Шепель Володимир Вікторович
+            {ie.recipient} <CopyButton value={ie.recipient} />
             <br />
-            IBAN: UA733220010000026006300003278
+            IBAN: {ie.iban} <CopyButton value={ie.iban} />
             <br />
-            ІПН/ЄДРПОУ: 2527501892
+            ІПН/ЄДРПОУ: {ie.id} <CopyButton value={ie.id} />
             <br />
             Акціонерне товариство: УНІВЕРСАЛ БАНК
             <br />
-            МФО: 322001
+            МФО: {ie.mfo} <CopyButton value={ie.mfo} />
             <br />
-            ОКПО Банку: 21133352
+            ОКПО Банку: {ie.okpo} <CopyButton value={ie.okpo} />
             <br />
             <br />
             🔸Призначення платежу:
             <br />
-            "За навчання (вкажіть дату початку модуля)"
+            {`"За навчання ${nextGrupDateToPrint}"`} <CopyButton value={`"За навчання ${nextGrupDateToPrint}"`} /> 
             <br />
             <br />
             🔥Важливо вказати призначення платежу
