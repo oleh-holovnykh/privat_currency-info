@@ -58,7 +58,7 @@ function App() {
     normalizeCurrency(euroRate);
   }
 
-  const nextGropuDate = new Date(createSchedule(modules, practices,retreats)[0].startDate);
+  const nextGropuDate = new Date(createSchedule(modules, practices,retreats).filter(group => group.type === 'module')[0].startDate);
   const nextGrupDateToPrint = `${nextGropuDate.getDate().toString().padStart(2, '0')}.${(nextGropuDate.getMonth() + 1).toString().padStart(2, '0')}`
 
   return (
@@ -68,12 +68,10 @@ function App() {
           <tbody>
             <tr>
               <td></td>
-              {/* <td className='text-gray-400'>Buy</td> */}
               <td className='text-gray-400'>Sell</td>
             </tr>
             <tr>
               <td>EUR</td>
-              {/* <td>{euroRate!.rateBuy}</td> */}
               <td>{euroRate?.rateSell}</td>
             </tr>
           </tbody>
@@ -105,20 +103,6 @@ function App() {
             </button>
           </div>
 
-          {/* <br />
-          <span className='text-gray-400'>
-            €50 = {Math.round(50 * euroRate!.rateSell)} грн
-            <br /> 
-            €100 = {Math.round(100 * euroRate!.rateSell)} грн{' '}
-          </span> */}
-{/* 
-          <span>
-            <b>Група практики:</b>
-            <br />
-            PayPal €{(600 / euroRate!.rateBuy).toFixed(2)}
-            <br />
-            ФОП 600 грн
-          </span> */}
       </div>
         {showRequisites && (
           <div className='text-left w-max mt-2 mx-auto text-gray-600'>
@@ -128,7 +112,7 @@ function App() {
             <br />
             ІПН/ЄДРПОУ: {ie.id} <CopyButton value={ie.id} />
             <br />
-            Акціонерне товариство: УНІВЕРСАЛ БАНК
+            Акціонерне товариство: {ie.bank} <CopyButton value={ie.bank} />
             <br />
             МФО: {ie.mfo} <CopyButton value={ie.mfo} />
             <br />
@@ -137,7 +121,7 @@ function App() {
             <br />
             🔸Призначення платежу:
             <br />
-            {`"За навчання ${nextGrupDateToPrint}"`} <CopyButton value={`"За навчання ${nextGrupDateToPrint}"`} /> 
+            {`"За навчання ${nextGrupDateToPrint}"`} <CopyButton value={`За навчання ${nextGrupDateToPrint}`} /> 
             <br />
             <br />
             🔥Важливо вказати призначення платежу
