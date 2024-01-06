@@ -10,7 +10,7 @@ import retreats from './api/retreatSchedule.json';
 function App() {
   const { currencies, loading, error } = useCurrencyData();
   const [showRequisites, setShowRequisites] = useState<boolean>(false);
-  const [showSchedule, setShowSchedule] = useState<boolean>(false);
+  const [showSchedule, setShowSchedule] = useState<boolean>(true);
 
   const handleRequisitesClick = () => {
     setShowRequisites(!showRequisites);
@@ -115,7 +115,7 @@ function App() {
           </span> */}
       </div>
         {showRequisites && (
-          <div className='text-left w-max mt-2 mx-auto text-gray-400'>
+          <div className='text-left w-max mt-2 mx-auto text-gray-600'>
             Отримувач: ФОП Шепель Володимир Вікторович
             <br />
             IBAN: UA733220010000026006300003278
@@ -142,16 +142,14 @@ function App() {
         )}
       
       {showSchedule && (<div className='flex justify-center items-center'>
-        <iframe
-          src="https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23ffffff&ctz=Europe%2FKiev&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&hl=uk&src=OTJhYzYxYTgwZmZkZWMxZGFmMDgwZDc5ODFkOTc3MGZmMTk2OTA3YWNmY2Y2NjcwYzRkMTIxMmJjODBlNzFhZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5"
-          style={{ borderWidth: 0, width: 500, height: 400 }}
-        ></iframe>
+      <div className='w-[350px] text-gray-600'>
+        <Schedule 
+          modules={modules}
+          practices={practices}
+          retreats={retreats}
+        />
+      </div>
       </div>)}
-      <Schedule 
-        modules={modules}
-        practices={practices}
-        retreats={retreats}
-      />
     </>
   );
 }

@@ -2,10 +2,11 @@ import { PracticeClass, Retreat, Module } from '../types/events';
 
 export const createSchedule = (
   modules: Module[],
-  classes: PracticeClass[],
+  practices: PracticeClass[],
   retreats: Retreat[]
 ) => {
-  let schedule = [...modules, ...classes, ...retreats];
+  let schedule = [...modules, ...practices, ...retreats];
+  const currentDate = new Date();
 
   schedule = schedule.sort((a, b) => {
     const dateA = new Date(a.startDate);
@@ -14,11 +15,15 @@ export const createSchedule = (
     return dateA.getTime() - dateB.getTime();
   });
 
-  schedule = schedule.map((event, id) => {
-    event.id = id;
+  schedule = schedule.filter(group => {
+    const startDate = new Date(group.startDate);
 
-    return event;
-  });
+    return startDate >= currentDate;
+  })
+
+  schedule = schedule.filter(group => {
+    return ('title' in group) || (group!.subclass === 2)
+  })
 
   schedule = schedule.map((event) => {
     if ('class' in event) {
