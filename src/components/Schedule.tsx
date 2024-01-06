@@ -22,7 +22,7 @@ export const Schedule: React.FC<Props> = ({ modules, practices, retreats }) => {
       if (group.type === 'class') {
         dateStr = `${startDate.getDate().toString().padStart(2, '0')}.${(startDate.getMonth() + 1).toString().padStart(2, '0')}`;
       } else {
-        dateStr = `🗓️ ${startDate.getDate().toString().padStart(2, '0')} - ${endDate.getDate().toString().padStart(2, '0')}.${(endDate.getMonth() + 1).toString().padStart(2, '0')}`;
+        dateStr = `🗓️ ${startDate.getDate().toString().padStart(2, '0')}-${endDate.getDate().toString().padStart(2, '0')}.${(endDate.getMonth() + 1).toString().padStart(2, '0')}`;
       }
 
       if ('title' in group) {
