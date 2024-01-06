@@ -8,7 +8,7 @@ import practices from './data/practiceSchedule.json';
 import retreats from './data/retreatSchedule.json';
 import ie from './data/individualEntrepreneur.json';
 import { createSchedule } from './helpers/сreateSchedule';
-import { CopyButton } from './components/copyButton';
+import { CopyButton } from './components/CopyButton';
 
 function App() {
   const { currencies, loading, error } = useCurrencyData();
