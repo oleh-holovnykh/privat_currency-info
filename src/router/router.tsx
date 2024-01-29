@@ -7,16 +7,16 @@ export const router = createBrowserRouter([
     {
       path: "react_currency-info/",
       element: <OnlineCourse />,
-      errorElement: <NotFoundPage />
-    },
-    {
-      path: "react_currency-info/online-course/",
-      element: <OnlineCourse />,
-      errorElement: <NotFoundPage />
-    },
-    {
-      path: "react_currency-info/offline-course/",
-      element: <OfflineCourse />,
-      errorElement: <NotFoundPage />
+      errorElement: <NotFoundPage />,
+      children: [
+        {
+          path: "online-course",
+          element: <OnlineCourse />,
+        },
+        {
+          path: "offline-course",
+          element: <OfflineCourse />,
+        },
+      ],
     },
 ]);
