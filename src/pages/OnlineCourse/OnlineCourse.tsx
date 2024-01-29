@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { findEuro } from './helpers/findEuro';
-import { normalizeCurrency } from './helpers/normalizeCurrency';
-import useCurrencyData from './hooks/useCurrencyData';
-import { Schedule } from './components/Schedule';
-import modules from './data/moduleSchedule.json';
-import practices from './data/practiceSchedule.json';
-import retreats from './data/retreatSchedule.json';
-import ie from './data/individualEntrepreneur.json';
-import { createSchedule } from './helpers/сreateSchedule';
-import { CopyButton } from './components/CopyButton';
+import React, { useState } from 'react'
+import { CopyButton } from '../../components/CopyButton';
+import { Schedule } from '../../components/Schedule';
+import { findEuro } from '../../helpers/findEuro';
+import { normalizeCurrency } from '../../helpers/normalizeCurrency';
+import { createSchedule } from '../../helpers/сreateSchedule';
+import useCurrencyData from '../../hooks/useCurrencyData';
+import modules from '../../data/onlineModuleSchedule.json';
+import practices from '../../data/onlinePracticeSchedule.json';
+import retreats from '../../data/onlineRetreatSchedule.json';
+import ie from '../../data/individualEntrepreneur.json';
 
-function App() {
+export const OnlineCourse: React.FC = () => {
   const { currencies, loading, error } = useCurrencyData();
   const [showRequisites, setShowRequisites] = useState<boolean>(false);
   const [showSchedule, setShowSchedule] = useState<boolean>(true);
@@ -83,6 +83,9 @@ function App() {
             <br />
             €150 = {Math.round(150 * euroRate!.rateSell)} грн
           </span>
+          <span className='mb-2 block'>
+            <b>Група практики:</b> 600 грн 
+          </span>
           <div className='mb-2'>
             <button
               onClick={handleRequisitesClick}
@@ -106,6 +109,8 @@ function App() {
       </div>
         {showRequisites && (
           <div className='text-left w-max mt-2 mx-auto text-gray-600'>
+            <b>За модуль</b>
+            <br/>
             {ie.recipient} <CopyButton value={ie.recipient} />
             <br />
             IBAN: {ie.iban} <CopyButton value={ie.iban} />
@@ -128,6 +133,29 @@ function App() {
             <br />
             🔥Важливо, щоб платіж був від фізособи.
             <br />А не від ФОП, чи організації
+            <br/>
+            <br/>
+            <b>За групу практики</b>
+            <br/>
+            <b>Олег:</b> 5363542102236842 <CopyButton value={'5363542102236842'} />
+            <br/>
+            <b>Марія:</b>
+            <br/>
+            ФОП РУДЬ МАРІЯ МИКОЛАЇВНА <CopyButton value={'ФОП РУДЬ МАРІЯ МИКОЛАЇВНА'} />
+            <br />
+            IBAN: UA073052990000026003025005897 <CopyButton value={'UA073052990000026003025005897'} />
+            <br />
+            ІПН/ЄДРПОУ: 3236319307 <CopyButton value={'3236319307'} />
+            <br />
+            МФО: 305299 <CopyButton value={'305299'} />
+            <br />
+            Рахунок отримувача: 26003025005897 <CopyButton value={'26003025005897'} />
+            <br />
+            🔸Призначення платежу:
+            <br />
+            {`"За консультаційні послуги"`} <CopyButton value={`За консультаційній послуги`} /> 
+            <br/>
+
           </div>
         )}
       
@@ -140,8 +168,7 @@ function App() {
         />
       </div>
       </div>)}
+      
     </>
   );
 }
-
-export default App;
