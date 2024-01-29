@@ -10,7 +10,7 @@ export const router = createBrowserRouter([
       errorElement: <NotFoundPage />
     },
     {
-      path: "react_currency-info//online-course",
+      path: "react_currency-info/online-course",
       element: <OnlineCourse />,
       errorElement: <NotFoundPage />
     },
