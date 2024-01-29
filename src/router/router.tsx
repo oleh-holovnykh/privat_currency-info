@@ -10,12 +10,12 @@ export const router = createBrowserRouter([
       errorElement: <NotFoundPage />
     },
     {
-      path: "/react_currency-info/online-course",
+      path: "/online-course",
       element: <OnlineCourse />,
       errorElement: <NotFoundPage />
     },
     {
-      path: "/react_currency-info/offline-course",
+      path: "/offline-course",
       element: <OfflineCourse />,
       errorElement: <NotFoundPage />
     },
