@@ -5,7 +5,7 @@ import { OfflineCourse } from '../pages/OfflineCourse';
 
 export const router = createBrowserRouter([
     {
-      path: "/",
+      path: "react_currency-info/",
       element: <OnlineCourse />,
       errorElement: <NotFoundPage />
     },
