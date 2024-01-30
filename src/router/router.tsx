@@ -1,11 +1,11 @@
-import { createBrowserRouter } from 'react-router-dom';
 import { OnlineCourse } from '../pages/OnlineCourse';
 import { OfflineCourse } from '../pages/OfflineCourse';
 import ErrorPage from '../pages/ErrorPage/ErrorPage';
+import { createHashRouter } from 'react-router-dom';
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
     {
-      path: "react_currency-info/",
+      path: "/",
       element: <OnlineCourse />,
       errorElement: <ErrorPage />,
       // children: [
@@ -24,11 +24,13 @@ export const router = createBrowserRouter([
       // ],
     },
     {
-      path: "react_currency-info/offline",
+      path: "/offline",
       element: <OfflineCourse />,
     },
     {
-      path: "react_currency-info/online",
+      path: "/online",
       element: <OnlineCourse />,
     },
-]);
+],{
+  basename: "/react_currency-info"
+});
